@@ -67,11 +67,17 @@ const menu = [
     { name: "Salada pequena", nameEn: "Small side salad", price: 3.00, image: demoPhotos.salad.url, description: "Folhas frescas, tomate e vinagrete.", descriptionEn: "Fresh leaves, tomato and vinaigrette." },
     { name: "Molho da casa", nameEn: "House sauce", price: 1.50, description: "Molho cremoso de ervas da casa.", descriptionEn: "Creamy house herb sauce." }
   ]},
-  { name: "Bebidas", image: demoPhotos.lemonade.url, items: [
-    { name: "Água mineral", nameEn: "Mineral water", price: 1.80, description: "Água mineral natural, 50 cl.", descriptionEn: "Still mineral water, 50 cl." },
-    { name: "Refrigerante", nameEn: "Soft drink", price: 2.70, description: "Refrigerante servido bem fresco, 33 cl.", descriptionEn: "Soft drink served chilled, 33 cl." },
-    { name: "Limonada da casa", nameEn: "House lemonade", price: 3.50, description: "Limonada fresca com hortelã e pouco açúcar.", descriptionEn: "Fresh lemonade with mint and just a little sugar." },
-    { name: "Sumo natural", nameEn: "Fresh juice", price: 4.00, description: "Sumo natural de laranja, preparado no momento.", descriptionEn: "Freshly squeezed orange juice." }
+  { name: "Bebidas", image: demoPhotos.lemonade.url, textOnly: true, items: [
+    { name: "Água mineral natural · 50 cl", nameEn: "Still mineral water · 50 cl", group: "Águas", price: 1.80, description: "Água mineral natural, servida fresca.", descriptionEn: "Still mineral water, served chilled." },
+    { name: "Água mineral com gás · 50 cl", nameEn: "Sparkling mineral water · 50 cl", group: "Águas", price: 1.80, description: "Água mineral com gás, servida fresca.", descriptionEn: "Sparkling mineral water, served chilled." },
+    { name: "Coca-Cola · 33 cl", nameEn: "Coca-Cola · 33 cl", group: "Refrigerantes e ice tea", price: 2.70, description: "Servida fresca.", descriptionEn: "Served chilled." },
+    { name: "Coca-Cola Zero · 33 cl", nameEn: "Coca-Cola Zero · 33 cl", group: "Refrigerantes e ice tea", price: 2.70, description: "Servida fresca.", descriptionEn: "Served chilled." },
+    { name: "Fanta Laranja · 33 cl", nameEn: "Fanta Orange · 33 cl", group: "Refrigerantes e ice tea", price: 2.70, description: "Servida fresca.", descriptionEn: "Served chilled." },
+    { name: "Sprite · 33 cl", nameEn: "Sprite · 33 cl", group: "Refrigerantes e ice tea", price: 2.70, description: "Servida fresca.", descriptionEn: "Served chilled." },
+    { name: "Ice Tea Limão · 33 cl", nameEn: "Lemon iced tea · 33 cl", group: "Refrigerantes e ice tea", price: 2.70, description: "Servido fresco.", descriptionEn: "Served chilled." },
+    { name: "Ice Tea Pêssego · 33 cl", nameEn: "Peach iced tea · 33 cl", group: "Refrigerantes e ice tea", price: 2.70, description: "Servido fresco.", descriptionEn: "Served chilled." },
+    { name: "Limonada da casa", nameEn: "House lemonade", group: "Bebidas da casa", price: 3.50, description: "Limonada fresca com hortelã e pouco açúcar.", descriptionEn: "Fresh lemonade with mint and just a little sugar." },
+    { name: "Sumo natural de laranja", nameEn: "Fresh orange juice", group: "Bebidas da casa", price: 4.00, description: "Preparado no momento.", descriptionEn: "Freshly squeezed to order." }
   ]},
   { name: "Cervejas", image: demoPhotos.beer.url, items: [
     { name: "Imperial · 25 cl", nameEn: "Draft beer · 25 cl", price: 2.50, description: "Cerveja de pressão servida bem fresca, 25 cl.", descriptionEn: "Draft beer served chilled, 25 cl." },
@@ -138,7 +144,7 @@ const categoryColors = {
 const englishCategory = {
   "No prato": "Main dishes", "Focaccias": "Focaccia", "Pregos": "Steak sandwiches", "Hambúrgueres": "Burgers", "Cachorros": "Hot dogs", "Saladas": "Salads", "Entradas": "Starters", "Infantil": "Kids’ menu", "Extras": "Sides and extras", "Cafetaria": "Coffee and tea", "Bebidas": "Drinks", "Cervejas": "Beer", "Licores": "Liqueurs", "Gin": "Gin", "Whiskey": "Whiskey", "Vinhos": "Wine", "Sangrias": "Sangria", "Sobremesas": "Desserts"
 };
-const englishGroups = { "Tintos": "Reds", "Brancos": "Whites", "Rosé": "Rosé", "Espumantes": "Sparkling", "A copo": "By the glass" };
+const englishGroups = { "Tintos": "Reds", "Brancos": "Whites", "Rosé": "Rosé", "Espumantes": "Sparkling", "A copo": "By the glass", "Águas": "Water", "Refrigerantes e ice tea": "Soft drinks and iced tea", "Bebidas da casa": "House drinks" };
 const englishNames = {};
 const englishDescriptions = {};
 const englishNotes = {};
@@ -288,6 +294,10 @@ function itemHasDetails(item) {
 function renderMenuItem(category, item, index) {
   const name = escapeHtml(itemLabel(category, item));
   const price = itemPrice(item);
+  if (category.textOnly) {
+    const description = itemDescription(category, item);
+    return "<div class=\"list-item list-item-static list-item-text-only\"><span><strong class=\"list-item-name\">" + name + "</strong>" + (description ? "<small class=\"list-item-description\">" + escapeHtml(description) + "</small>" : "") + "</span><span>" + price + "</span></div>";
+  }
   if (!itemHasDetails(item)) return "<div class=\"list-item list-item-static\"><span>" + name + "</span><span>" + price + "</span></div>";
   const photo = menuItemPhoto(category, item);
   let media = "<span class=\"list-item-media list-item-media-placeholder\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\"><rect x=\"3\" y=\"4\" width=\"18\" height=\"16\" rx=\"3\"></rect><circle cx=\"8.5\" cy=\"9\" r=\"1.5\"></circle><path d=\"m5 17 5-5 3 3 2-2 4 4\"></path></svg></span>";
@@ -403,7 +413,9 @@ function renderAllMenu() {
 function renderCategoryMenu(category) {
   const english = language === "en";
   const back = english ? "Main menu" : "Menu inicial";
-  const hint = category.items.some(itemHasDetails)
+  const hint = category.textOnly
+    ? (english ? "A simple list with example prices; no product photos." : "Lista simples com preços de exemplo, sem fotografias dos produtos.")
+    : category.items.some(itemHasDetails)
     ? (english ? "Tap an item to see its details and available photos." : "Toca num item para ver os detalhes e as fotografias disponíveis.")
     : "";
   let lastGroup = "";

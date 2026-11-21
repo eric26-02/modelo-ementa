@@ -740,6 +740,10 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--cream); outline
 .list-item-action { color: var(--mute); font-size: 10px; font-weight: 400; }
 .list-item-price { grid-column: 2; color: var(--cream); font-size: 12px; font-weight: 650; text-align: left; white-space: normal; }
 .list-item-static > span:first-child { flex: 1; }
+.list-item-text-only { align-items: center; }
+.list-item-text-only > span:first-child { display: grid; flex: 1; gap: 3px; }
+.list-item-text-only .list-item-name { font-size: 13px; }
+.list-item-description { color: var(--mute); font-size: 10px; font-weight: 400; line-height: 1.35; }
 .back-chip { max-width: 160px; overflow: hidden; text-overflow: ellipsis; }
 .list-footer { margin: 24px 0 0; padding-top: 15px; border-top: 1px solid var(--line); color: var(--mute); font-size: 10px; line-height: 1.6; }
 .list-footer a { color: var(--cream); text-decoration: underline; text-underline-offset: 3px; }
