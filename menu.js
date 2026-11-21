@@ -22,6 +22,7 @@ const demoPhotos = {
   houseBurger: { url: "assets/demo-burger.jpg", altPt: "Fotografia ilustrativa de hambúrguer", altEn: "Illustrative burger photo", credit: "Fotografia de exemplo" },
   houseSangria: { url: "assets/demo-sangria.jpg", altPt: "Fotografia ilustrativa de sangria", altEn: "Illustrative sangria photo", credit: "Fotografia de exemplo" }
 };
+const instagramProfileUrl = "https://www.instagram.com/";
 const menuPhotoByUrl = new Map(Object.values(demoPhotos).map(function (photo) { return [photo.url, photo]; }));
 const menu = [
   { name: "Entradas", image: demoPhotos.soup.url, items: [
@@ -309,6 +310,12 @@ function photoSourceLabel(photo) {
   if (!photo || !photo.credit || photo.credit === "Fotografia de exemplo") return language === "en" ? "Example photo" : "Fotografia de exemplo";
   return (language === "en" ? "Illustrative photo · " : "Fotografia ilustrativa · ") + photo.credit;
 }
+function renderInstagramLink() {
+  const english = language === "en";
+  const label = english ? "Follow the restaurant on Instagram" : "Segue o restaurante no Instagram";
+  const detail = english ? "Photos, news and updates" : "Fotografias, novidades e atualizações";
+  return "<a class=\"instagram-footer-link\" href=\"" + escapeHtml(instagramProfileUrl) + "\" target=\"_blank\" rel=\"noopener noreferrer\" aria-label=\"" + escapeHtml(label) + "\"><span class=\"instagram-footer-icon\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\"><rect x=\"3.5\" y=\"3.5\" width=\"17\" height=\"17\" rx=\"5\"></rect><circle cx=\"12\" cy=\"12\" r=\"3.7\"></circle><circle class=\"instagram-footer-dot\" cx=\"17.7\" cy=\"6.5\" r=\"1\"></circle></svg></span><span class=\"instagram-footer-copy\"><strong>Instagram</strong><small>" + escapeHtml(detail) + "</small></span><span class=\"instagram-footer-arrow\" aria-hidden=\"true\">" + arrowIcon("external") + "</span></a>";
+}
 function renderDishSlide(category, item, index) {
   const categoryId = slug(category.name);
   const key = categoryId + "-" + index;
@@ -359,7 +366,7 @@ function renderHomeSlide() {
   const heroTitle = english ? "A menu made for your place." : "Uma ementa feita para a sua casa.";
   const heroCopy = english ? "Explore dishes, drinks and desserts with photos and clear details." : "Explore pratos, bebidas e sobremesas com fotografias e informação clara.";
   const groups = landingCategoryGroups.map(renderLandingCategoryGroup).join("");
-  return "<section class=\"menu-slide list-slide landing-slide\" data-key=\"inicio\"><div class=\"list-background\"></div><div class=\"list-panel landing-panel\"><section class=\"landing-hero\"><div class=\"landing-hero-media\"><img src=\"assets/demo-burger.jpg\" alt=\"\" fetchpriority=\"high\"><img src=\"assets/demo-sangria.jpg\" alt=\"\" loading=\"lazy\"></div><div class=\"landing-hero-copy\"><span class=\"landing-hero-kicker\">MESA &amp; BRASA · EMENTA DIGITAL</span><h1 class=\"landing-hero-title\">" + heroTitle + "</h1><p class=\"landing-hero-description\">" + heroCopy + "</p><button class=\"landing-hero-cta\" type=\"button\" data-action=\"show-all\"><span>" + allLabel + "</span><span aria-hidden=\"true\">→</span></button></div></section><p class=\"demo-notice\">" + (english ? "Fictional demo: dishes, prices, hours, contacts and photos are examples." : "Demonstração fictícia: pratos, preços, horários, contactos e fotografias são exemplos.") + "</p>" + groups + "<div class=\"landing-links\"><button type=\"button\" data-action=\"open-videos\">" + videosLabel + "</button><button type=\"button\" data-action=\"open-info\">" + infoLabel + "</button></div></div></section>";
+  return "<section class=\"menu-slide list-slide landing-slide\" data-key=\"inicio\"><div class=\"list-background\"></div><div class=\"list-panel landing-panel\"><section class=\"landing-hero\"><div class=\"landing-hero-media\"><img src=\"assets/demo-burger.jpg\" alt=\"\" fetchpriority=\"high\"><img src=\"assets/demo-sangria.jpg\" alt=\"\" loading=\"lazy\"></div><div class=\"landing-hero-copy\"><span class=\"landing-hero-kicker\">MESA &amp; BRASA · EMENTA DIGITAL</span><h1 class=\"landing-hero-title\">" + heroTitle + "</h1><p class=\"landing-hero-description\">" + heroCopy + "</p><button class=\"landing-hero-cta\" type=\"button\" data-action=\"show-all\"><span>" + allLabel + "</span><span aria-hidden=\"true\">→</span></button></div></section><p class=\"demo-notice\">" + (english ? "Fictional demo: dishes, prices, hours, contacts and photos are examples." : "Demonstração fictícia: pratos, preços, horários, contactos e fotografias são exemplos.") + "</p>" + groups + "<div class=\"landing-links\"><button type=\"button\" data-action=\"open-videos\">" + videosLabel + "</button><button type=\"button\" data-action=\"open-info\">" + infoLabel + "</button></div>" + renderInstagramLink() + "</div></section>";
 }
 function renderLandingCategoryGroup(group) {
   const english = language === "en";
@@ -418,7 +425,7 @@ function renderInfoSlide() {
   } : {
     label: "DEMONSTRAÇÃO FICTÍCIA · DADOS DE EXEMPLO", title: "Informações úteis", hours: "Horário", hoursText: "Terça a domingo · 12:00–15:00 e 19:00–23:00 · segunda-feira encerrado.", contact: "Contacto e reservas", contactText: '<a href="mailto:reservas@example.com">reservas@example.com</a><br>Localização de demonstração · Porto, Portugal', allergens: "Alergénios", allergensText: "Guia ilustrativo. Confirma os ingredientes e possíveis contaminações cruzadas com a equipa antes de encomendar.", note: "Sobre este exemplo", noteText: "Os pratos, preços, horários, contactos e localização desta página são exemplos fictícios para apresentação. Substitui-os por informação aprovada pelo restaurante."
   };
-  return '<section class="menu-slide list-slide info-slide" data-category="informacoes" data-key="informacoes" style="--c:#4b1d3f"><div class="list-background"></div><div class="list-panel info-panel"><span class="list-eyebrow">' + text.label + '</span><h1 class="list-title">' + text.title + '</h1><div class="info-card"><h2>' + text.hours + '</h2><p>' + text.hoursText + '</p></div><div class="info-card"><h2>' + text.contact + '</h2><p>' + text.contactText + '</p></div><div class="info-card"><h2>' + text.allergens + '</h2><p>' + text.allergensText + '</p></div><div class="info-card"><h2>' + text.note + '</h2><p>' + text.noteText + '</p></div></div></section>';
+  return '<section class="menu-slide list-slide info-slide" data-category="informacoes" data-key="informacoes" style="--c:#4b1d3f"><div class="list-background"></div><div class="list-panel info-panel"><span class="list-eyebrow">' + text.label + '</span><h1 class="list-title">' + text.title + '</h1><div class="info-card"><h2>' + text.hours + '</h2><p>' + text.hoursText + '</p></div><div class="info-card"><h2>' + text.contact + '</h2><p>' + text.contactText + '</p></div><div class="info-card"><h2>' + text.allergens + '</h2><p>' + text.allergensText + '</p></div><div class="info-card"><h2>' + text.note + '</h2><p>' + text.noteText + '</p></div>' + renderInstagramLink() + '</div></section>';
 }
 function renderVideoSlide() {
   const english = language === "en";

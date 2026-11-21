@@ -15,6 +15,7 @@ Abra `index.html` num navegador. O projeto é estático e não precisa de instal
 - Atualize os cartões em `landingCategoryGroups` e `landingCategoryImages`, no mesmo ficheiro.
 - Troque as fotografias em `assets/photos/`, `assets/demo-burger.jpg` e `assets/demo-sangria.jpg` por fotografias autorizadas.
 - Consulte `ASSET_SOURCES.md` para encontrar as fontes das imagens de demonstração.
+- Atualize `instagramProfileUrl` no início de `menu.js` com o perfil oficial do restaurante. Até lá, o botão abre a página geral do Instagram.
 - Atualize horários, reservas, alergénios, informação legal e redes sociais em `renderInfoSlide()` e `renderVideoSlide()`.
 - Confirme todos os conteúdos antes de apresentar o menu como uma ementa real.
 
