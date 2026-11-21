@@ -409,6 +409,24 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--cream); outline
 .list-eyebrow { margin-bottom: 7px; }
 .list-title { margin-bottom: 16px; font-size: clamp(35px, 9vw, 48px); }
 .list-note { margin: -6px 0 17px; color: var(--mute); font-size: 12px; line-height: 1.55; }
+.menu-category-banner {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  min-height: 132px;
+  align-items: flex-end;
+  overflow: hidden;
+  margin: 0 0 17px;
+  border: 1px solid rgba(243, 236, 228, .2);
+  border-radius: 15px;
+  background: linear-gradient(145deg, #49342b, #211819);
+}
+.menu-category-banner-media, .menu-category-banner-overlay { position: absolute; inset: 0; }
+.menu-category-banner-media img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 48%; filter: brightness(.88) saturate(1.08); }
+.menu-category-banner-overlay { background: linear-gradient(90deg, rgba(18, 13, 14, .7), rgba(18, 13, 14, .08) 82%), linear-gradient(0deg, rgba(18, 13, 14, .72), transparent 74%); }
+.menu-category-banner-copy { position: relative; z-index: 1; display: grid; gap: 5px; padding: 17px 18px; text-shadow: 0 2px 12px rgba(0, 0, 0, .6); }
+.menu-category-banner-copy small { color: #ead0ae; font-size: 8px; font-weight: 800; letter-spacing: .14em; }
+.menu-category-banner-copy strong { color: var(--cream); font: 600 clamp(25px, 7vw, 34px)/1 var(--serif); letter-spacing: -.025em; }
 .list-group-title {
   margin: 22px 0 5px;
   padding-bottom: 5px;
@@ -689,6 +707,7 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--cream); outline
   background: linear-gradient(145deg, rgba(243, 236, 228, .12), rgba(18, 13, 14, .5));
 }
 .list-item-media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.list-item-media img { filter: brightness(1.04) saturate(1.06); }
 .list-item-media-placeholder svg { width: 24px; height: 24px; fill: none; stroke: rgba(243, 236, 228, .55); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.25; }
 .list-item-media-video::after { position: absolute; inset: 0; content: ""; background: rgba(0, 0, 0, .14); }
 .list-item-media-video span { z-index: 1; width: 0; height: 0; margin-left: 3px; border-top: 7px solid transparent; border-bottom: 7px solid transparent; border-left: 10px solid var(--cream); filter: drop-shadow(0 1px 3px rgba(0, 0, 0, .5)); }
